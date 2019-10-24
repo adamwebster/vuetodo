@@ -1,13 +1,15 @@
 <template>
-<div id="app">
+<div id="app" class="vuetodo-wrapper">
   <page-heading>
     Todo App
     <template v-slot:sub-heading>
       {{greeting}}
     </template>
   </page-heading>
-  <Button @click="log" primary>Test</Button>
-  <List :data="listItems" />
+    <input :value="newToDoValue" @change="changevalue" />
+
+  <Button @click="addItem" primary>Add Item</Button>
+  <List :removeClick="removeClick" :data="listItems" />
 
 </div>
 </template>
@@ -27,6 +29,7 @@ export default {
   data: () => {
     return {
       greeting: 'Testing what vue js can do',
+      newToDoValue: '',
       listItems: [{
         id: '1',
         label: 'item1'
@@ -40,14 +43,30 @@ export default {
     }
   },
   methods: {
-    log: function () {
+    addItem: function () {
       this.greeting = 'I am now this'
+      if(this.newToDoValue.length === 0){
+        console.log('Can\'t add the item because no text is entered.')
+        return;
+      }
       this.listItems.push({
         id: this.listItems.length + 1,
-        label: 'item' + (this.listItems.length + 1)
+        label: this.newToDoValue
       })
-    }
+      this.newToDoValue = '';
+    },
+    changevalue: function (e){
+      console.log('change value', e.target.value);
+      this.newToDoValue = e.target.value;
+    },
+    removeClick: function (index) {     
+       console.log("here", index);
+       const newItems = this.listItems.slice();
 
+      newItems.splice(index, 1);
+
+      this.listItems = newItems;
+    }
   }
 
 }
@@ -56,5 +75,14 @@ export default {
 <style>
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  background-color:#f7f7f7;
+}
+
+.vuetodo-wrapper{
+  width:500px;
+  margin:0 auto;
+  border: solid 1px #ccc;
+  padding:10px;
+  box-sizing:border-box;
 }
 </style>
