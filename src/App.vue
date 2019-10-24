@@ -7,7 +7,8 @@
     </template>
   </page-heading>
     <input :value="newToDoValue" @change="changevalue" />
-
+    <span>Custom Input next</span>
+  <Input @change="testChange" />
   <Button @click="addItem" primary>Add Item</Button>
   <List :removeClick="removeClick" :data="listItems" />
 
@@ -18,6 +19,7 @@
 import List from './components/List';
 import Button from './components/Button';
 import PageHeading from './components/PageHeading';
+import Input from './components/Input';
 
 export default {
   name: 'app',
@@ -25,6 +27,7 @@ export default {
     List,
     Button,
     PageHeading,
+    Input,
   },
   data: () => {
     return {
@@ -58,6 +61,9 @@ export default {
     changevalue: function (e){
       console.log('change value', e.target.value);
       this.newToDoValue = e.target.value;
+    },
+    testChange: function (e) {
+      console.log('testing', e);
     },
     removeClick: function (index) {     
        console.log("here", index);
