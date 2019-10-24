@@ -1,17 +1,14 @@
 <template>
 <div id="app">
-  <PageHeading>
+  <page-heading>
     Todo App
-    <template v-slot:subHeading>
-      A vue application to test what vue can do.
+    <template v-slot:sub-heading>
+      {{greeting}}
     </template>
-  </PageHeading>
-  <Button primary>Test
-    <template v-slot:text>
-      testing
-    </template>
-  </Button>
-  <List />
+  </page-heading>
+  <Button @click="log" primary>Test</Button>
+  <List :data="listItems" />
+
 </div>
 </template>
 
@@ -26,7 +23,33 @@ export default {
     List,
     Button,
     PageHeading,
+  },
+  data: () => {
+    return {
+      greeting: 'Testing what vue js can do',
+      listItems: [{
+        id: '1',
+        label: 'item1'
+      }, {
+        id: '2',
+        label: 'item2'
+      }, {
+        id: '3',
+        label: 'item3'
+      }, ]
+    }
+  },
+  methods: {
+    log: function () {
+      this.greeting = 'I am now this'
+      this.listItems.push({
+        id: this.listItems.length + 1,
+        label: 'item' + (this.listItems.length + 1)
+      })
+    }
+
   }
+
 }
 </script>
 

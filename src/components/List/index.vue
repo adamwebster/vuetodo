@@ -1,8 +1,8 @@
 <template>
 <ul>
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
+<li v-for="item in data" :key="item.id" >
+{{item.label}}
+</li>
 </ul>
 </template>
 
@@ -10,6 +10,7 @@
 export default {
   name: 'List',
   props: {
+    data: Array,
   }
 }
 </script>

@@ -4,7 +4,7 @@
     <slot />
   </h1>
   <h4>
-    <slot name="subHeading" />
+    <slot name="sub-heading" />
   </h4>
 </div>
 </template>

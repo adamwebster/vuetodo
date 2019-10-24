@@ -4,6 +4,7 @@ import About from './pages/about.vue'
 const NotFound = { template: '<p>Page not found</p>'}
 Vue.config.productionTip = false
 
+
 const routes = {
   '/': App,
   '/about': About
