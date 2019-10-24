@@ -6,7 +6,7 @@
       A vue application to test what vue can do.
     </template>
   </PageHeading>
-  <Button>Test
+  <Button primary>Test
     <template v-slot:text>
       testing
     </template>
