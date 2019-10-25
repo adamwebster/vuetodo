@@ -49,6 +49,8 @@ export default {
     background-color:transparent;
     color: #777;
     font-size:18px;
+    margin:1px 0 0 0;
+    padding:0;
   }
 
  
