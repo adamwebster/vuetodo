@@ -1,9 +1,9 @@
 <template>
 <ul v-if="data.length > 0" class="vuetodo-list">
-<li v-for="(item, index) in data" :key="item.id" >
-{{item.label}}
-<button @click="removeClick(index)">Remove {{index}}</button>
-</li>
+  <li v-for="(item, index) in data" :key="item.id">
+    {{item.label}}
+    <button @click="removeClick(index)"><font-awesome-icon icon="times-circle" /></button>
+  </li>
 </ul>
 </template>
 
@@ -12,29 +12,39 @@ export default {
   name: 'List',
   props: {
     data: Array,
-    removeClick: {type: Function,  default: () => {}}
+    removeClick: {
+      type: Function,
+      default: () => {}
+    }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
-<style scoped>
-.vuetodo-list{
-  width: 90%;
+<style lang="scss" scoped>
+.vuetodo-list {
+  width: 100%;
   border: solid 1px #ccc;
-  list-style:none;
-  background-color:#fff;
-  margin:10px auto;
-  padding:0;
-}
-.vuetodo-list li{
-  border-bottom: solid 1px #ccc;
-  padding:10px 10px 10px 10px;
-  margin:0;
-  box-sizing:border-box;
-}
-.vuetodo-list li:last-child{
-  border-bottom: none;
+  list-style: none;
+  background-color: darken(#fff, 5%);
+  margin: 10px auto;
+  padding: 0;
+
+  & li {
+    border-bottom: solid 1px #ccc;
+    padding: 10px 10px 10px 10px;
+    margin: 0;
+    box-sizing: border-box;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  button{
+    float:right;
+    border:none;
+    background-color:transparent;
+    color: #cd7e7e;
+  }
 }
 </style>

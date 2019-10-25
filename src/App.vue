@@ -6,10 +6,10 @@
       {{greeting}}
     </template>
   </page-heading>
-    <input :value="newToDoValue" @change="changevalue" />
-    <span>Custom Input next</span>
-  <Input @change="testChange" />
+  <div class="flex-row">
+  <Input placeholder="test" :value="newToDoValue" @change="changevalue"  />
   <Button @click="addItem" primary>Add Item</Button>
+  </div>
   <List :removeClick="removeClick" :data="listItems" />
 
 </div>
@@ -78,10 +78,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   background-color:#f7f7f7;
+  color:#656565;
 }
 
 .vuetodo-wrapper{
@@ -90,5 +91,11 @@ body {
   border: solid 1px #ccc;
   padding:10px;
   box-sizing:border-box;
+  background-color:#fff;
+}
+.flex-row{
+  display:flex;
+  flex: 1 1;
+  flex-flow: row;
 }
 </style>
