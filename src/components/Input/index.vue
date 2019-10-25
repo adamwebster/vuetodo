@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
  input{
    border:solid 1px #ccc;
    height:34px;
@@ -22,6 +22,9 @@ export default {
    display:flex;
    flex: 1 1;
    margin:0;
+   &:focus{
+   outline-color:tomato;
+   }
  }
  
 </style>

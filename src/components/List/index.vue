@@ -51,6 +51,10 @@ export default {
     font-size:18px;
     margin:1px 0 0 0;
     padding:0;
+    cursor:pointer;
+    &:hover{
+      color:darken(#777, 10%)
+    }
   }
 
  
@@ -63,5 +67,6 @@ export default {
     border: solid 1px #ccc;
     text-align:center;
     color: #999;
+    margin-top:10px;
   }
 </style>
