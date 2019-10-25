@@ -21,6 +21,7 @@ export default {
    margin-bottom:10px;
    display:flex;
    flex: 1 1;
+   margin:0;
  }
  
 </style>
