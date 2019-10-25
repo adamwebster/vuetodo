@@ -3,6 +3,7 @@ import App from './App.vue'
 import About from './pages/about.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimesCircle, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const NotFound = { template: '<p>Page not found</p>'}
