@@ -44,6 +44,9 @@ button {
     &:hover{
       background-color: darken($accentColor, 10%);
     }
+    &:focus{
+      border-color: darken($accentColor, 20%);
+    }
   }
 
 }
