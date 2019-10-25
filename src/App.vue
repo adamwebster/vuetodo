@@ -12,7 +12,7 @@
     </template>
   </Alert>
   <div class="flex-row">
-    <Input placeholder="Add an item to the list..." :value="newToDoValue" @change="changevalue" />
+    <Input placeholder="Add an item to the list..." :value="newToDoValue" @keyup="changevalue" @keyup.esc="resetInput" />
     <Button @click="addItem" primary>Add Item</Button>
   </div>
   <List :removeClick="removeClick" :data="listItems" />
@@ -69,9 +69,13 @@ export default {
     changevalue: function (e) {
       console.log('change value', e.target.value);
       this.newToDoValue = e.target.value;
+      this.showAlert = false;
     },
     testChange: function (e) {
       console.log('testing', e);
+    },
+    resetInput: function (){
+      this.newToDoValue = '';
     },
     removeClick: function (index) {
       console.log("here", index);
