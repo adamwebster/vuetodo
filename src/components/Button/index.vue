@@ -38,7 +38,7 @@ button {
   }
 
   &.primary {
-    background-color: #cd7e7e;
+    background-color: $accentColor;
     color: lighten(#cd7e7e, 100%);
     &:hover{
       background-color: darken(#cd7e7e, 10%);
