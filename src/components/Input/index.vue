@@ -23,7 +23,8 @@ export default {
    flex: 1 1;
    margin:0;
    &:focus{
-   outline-color:tomato;
+     outline: none;
+   border-color:tomato;
    }
  }
  
