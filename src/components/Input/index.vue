@@ -1,14 +1,14 @@
 <template>
-<input v-on="$listeners">
+<input v-on="$listeners" :value="value" v-bind="$props">
 </template>
 
 <script>
 export default {
   name: 'Input',
   props: {
-    change:{ type: Function }
+    change:{ type: Function },
+    value: String,
   },
-
 }
 </script>
 

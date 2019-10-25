@@ -5,6 +5,9 @@
     <button @click="removeClick(index)"><font-awesome-icon icon="times-circle" /></button>
   </li>
 </ul>
+<div class="vuetodo-emptystate" v-else>
+  Add an item to the list
+</div>
 </template>
 
 <script>
@@ -46,5 +49,16 @@ export default {
     background-color:transparent;
     color: #cd7e7e;
   }
+
+ 
 }
+ .vuetodo-emptystate{
+    width:100%;
+    padding:20px;
+      background-color: darken(#fff, 5%);
+    box-sizing:border-box;
+    border: solid 1px #ccc;
+    text-align:center;
+    color: #999;
+  }
 </style>

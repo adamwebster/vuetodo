@@ -23,8 +23,8 @@ export default {
 <style lang="scss" scoped>
 button {
   background-color: transparent;
-  border: solid 1px #cd7e7e;
-  color: #cd7e7e;
+  border: solid 1px $accentColor;
+  color: $accentColor;
   border-radius: 5px;
   height: 34px;
   padding: 0 10px;
@@ -33,15 +33,15 @@ button {
   cursor: pointer;
 
   &:hover {
-    border-color: darken(#cd7e7e, 10%);
-    color: darken(#cd7e7e, 10%)
+    border-color: darken($accentColor, 10%);
+    color: darken($accentColor, 10%)
   }
 
   &.primary {
     background-color: $accentColor;
-    color: lighten(#cd7e7e, 100%);
+    color: lighten($accentColor, 100%);
     &:hover{
-      background-color: darken(#cd7e7e, 10%);
+      background-color: darken($accentColor, 10%);
     }
   }
 
