@@ -16,7 +16,7 @@
     <Datepicker :value="selectedDate" placeholder="Choose a date..." @selected="changeDate" format="MMM dsu yyyy" />
     <Button @click="addItem" primary>Add Item</Button>
   </div>
-  <List :removeClick="removeClick" :data="listItems" />
+  <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
 </div>
 </template>
 
@@ -72,6 +72,7 @@ export default {
         id: this.listItems.length + 1,
         label: this.newToDoValue,
         date: this.selectedDate,
+        completed: false,
       })
 
 
@@ -80,7 +81,6 @@ export default {
       this.selectedDate = '';
     },
     changevalue: function (e) {
-      console.log('change value', e.target.value);
       this.newToDoValue = e.target.value;
       this.showAlert = false;
     },
@@ -96,13 +96,18 @@ export default {
       this.showAlert = false;
     },
     removeClick: function (index) {
-      console.log("here", index);
       const newItems = this.listItems.slice();
       newItems.splice(index, 1);
-      
       this.listItems = newItems;
-            localStorage.setItem('toDos',  JSON.stringify(this.listItems))
+      localStorage.setItem('toDos',  JSON.stringify(this.listItems))
+    },
+    markCompleted: function (index){
+      const newItems = this.listItems.slice();
+      newItems[index].completed = !newItems[index].completed;
+      this.listItems = newItems;
+      localStorage.setItem('toDos',  JSON.stringify(this.listItems))
     }
+
   }
 
 }

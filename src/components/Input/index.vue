@@ -24,7 +24,7 @@ input {
   display: flex;
   flex: 1 1;
   margin: 0;
-  webkit-apperance:none;
+  -webkit-apperance:none;
   &:focus {
     outline: none;
     border-color: tomato;

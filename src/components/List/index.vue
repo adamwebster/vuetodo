@@ -1,6 +1,7 @@
 <template>
 <ul v-if="data.length > 0" class="vuetodo-list">
   <li v-for="(item, index) in sortedItems" :key="item.id">
+    <font-awesome-icon @click="completeClick(index)" class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
     <span class="label">
       {{item.label}}
     </span>
@@ -11,19 +12,23 @@
   </li>
 </ul>
 <div class="vuetodo-emptystate" v-else>
-<font-awesome-icon icon="calendar-check" />
+  <font-awesome-icon :icon="['far', 'calendar-check']" />
   Add an item to the list
 </div>
 </template>
 
 <script>
-  import moment from 'moment'
+import moment from 'moment'
 
 export default {
   name: 'List',
   props: {
     data: Array,
     removeClick: {
+      type: Function,
+      default: () => {}
+    },
+    completeClick: {
       type: Function,
       default: () => {}
     }
@@ -35,10 +40,10 @@ export default {
     }
   },
   filters: {
-  moment: function (date) {
-    return moment(date).format('MMMM Do YYYY');
-  }
-},
+    moment: function (date) {
+      return moment(date).format('MMMM Do YYYY');
+    }
+  },
 
   methods: {}
 }
@@ -65,7 +70,7 @@ export default {
 
     .label {
       display: inline-block;
-      width: calc(100% - 20px);
+      width: calc(100% - 40px);
     }
 
     .date {
@@ -74,6 +79,15 @@ export default {
       display: inline-block;
       color: #999;
     }
+
+    .vuetodo-list_status {
+      margin-right: 5px;
+      cursor: pointer;
+      &:hover{
+        color: $accentColor;
+      }
+    }
+
   }
 
   button {
