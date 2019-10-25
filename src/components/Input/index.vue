@@ -24,10 +24,11 @@ input {
   display: flex;
   flex: 1 1;
   margin: 0;
+  border-radius: $borderRadius;
   -webkit-appearance:none;
   &:focus {
     outline: none;
-    border-color: tomato;
+    border-color: $accentColor;
   }
 
 }

@@ -32,6 +32,7 @@ button {
   outline: none;
   cursor: pointer;
   margin:0;
+  border-radius: $borderRadius;
 
   &:hover {
     border-color: darken($accentColor, 10%);

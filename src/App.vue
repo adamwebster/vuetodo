@@ -12,6 +12,11 @@
     </template>
   </Alert>
   <div class="flex-row">
+    <Widget type="total" :number="totalItemCount" message="Total todos"></Widget>
+    <Widget type="today" :number="dueToday" message="Todos due today"></Widget>
+    <Widget type="overdue" :number="overDue" message="Todos overdue"></Widget>
+  </div>
+  <div class="flex-row vuetodo_addnew">
     <Input placeholder="Tile of item..." :value="newToDoValue" @keyup="changevalue" @keyup.esc="resetInput" />
     <Datepicker :value="selectedDate" placeholder="Choose a date..." @selected="changeDate" format="MMM dsu yyyy" />
     <Button @click="addItem" primary>Add Item</Button>
@@ -26,6 +31,8 @@ import Button from './components/Button';
 import PageHeading from './components/PageHeading';
 import Input from './components/Input';
 import Alert from './components/Alert';
+import Widget from './components/Widget';
+
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 export default {
@@ -36,7 +43,8 @@ export default {
     PageHeading,
     Input,
     Alert,
-    Datepicker
+    Datepicker,
+    Widget
   },
   data: () => {
     return {
@@ -44,7 +52,7 @@ export default {
       greeting: 'Testing what vue js can do',
       alertMessage: '',
       newToDoValue: '',
-      selectedDate: '',
+      selectedDate: null,
       formattedDate: '',
       listItems: JSON.parse(localStorage.getItem('toDos')) || [],
     }
@@ -63,20 +71,16 @@ export default {
         return;
       }
       let localStorageList = JSON.parse(localStorage.getItem('toDos'));
-      if(!localStorageList) {
+      if (!localStorageList) {
         localStorage.setItem('toDos', JSON.stringify([]));
       }
-    
-  console.log(JSON.parse(localStorage.getItem('toDos')));
       this.listItems.push({
-        id: this.listItems.length + 1,
+        id: Math.floor(Math.random() * 90000) + 10000,
         label: this.newToDoValue,
         date: this.selectedDate,
         completed: false,
       })
-
-
-      localStorage.setItem('toDos',  JSON.stringify(this.listItems))
+      localStorage.setItem('toDos', JSON.stringify(this.listItems))
       this.newToDoValue = '';
       this.selectedDate = '';
     },
@@ -87,7 +91,7 @@ export default {
     testChange: function (e) {
       console.log('testing', e);
     },
-    resetInput: function (){
+    resetInput: function () {
       this.newToDoValue = '';
     },
     changeDate: function (e) {
@@ -97,15 +101,32 @@ export default {
     },
     removeClick: function (index) {
       const newItems = this.listItems.slice();
-      newItems.splice(index, 1);
+      const toRemove = this.listItems.filter(item => item.id === index);
+      const toRemoveIndex = this.listItems.indexOf(toRemove[0]);
+      newItems.splice(toRemoveIndex, 1);
       this.listItems = newItems;
-      localStorage.setItem('toDos',  JSON.stringify(this.listItems))
+      localStorage.setItem('toDos', JSON.stringify(this.listItems))
     },
-    markCompleted: function (index){
+    markCompleted: function (index) {
       const newItems = this.listItems.slice();
-      newItems[index].completed = !newItems[index].completed;
+      const toCheck = this.listItems.filter(item => item.id === index);
+      toCheck[0].completed = !toCheck[0].completed;
       this.listItems = newItems;
-      localStorage.setItem('toDos',  JSON.stringify(this.listItems))
+      localStorage.setItem('toDos', JSON.stringify(this.listItems))
+    }
+
+  },
+  computed: {
+    totalItemCount: function () {
+      return this.listItems.length;
+    },
+    dueToday: function () {
+      return this.listItems.filter(item => moment(item.date).format('MMM D YYYY') === moment().format('MMM D YYYY')).length;
+    },
+    overDue: function () {
+      const formatDate = (dateToFormat) => moment.utc(dateToFormat).format('MMM D YYYY')
+      return this.listItems.filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
+
     }
 
   }
@@ -127,26 +148,31 @@ body {
   padding: 10px;
   box-sizing: border-box;
   background-color: #fff;
+  border-radius: $borderRadius;
 }
 
 .flex-row {
   display: flex;
   flex: 1 1;
   flex-flow: row;
+  &.vuetodo_addnew{
+    margin-bottom: 25px;
+  }
 }
 
-.vdp-datepicker{
- margin: 0 5px;
+.vdp-datepicker {
+  margin: 0 5px;
 }
 
-.vdp-datepicker__calendar{
-  .cell:not(.blank):not(.day-header){
-    &.selected{
-      background: $accentColor!important;
+.vdp-datepicker__calendar {
+  .cell:not(.blank):not(.day-header) {
+    &.selected {
+      background: $accentColor !important;
       color: lighten($accentColor, 25%);
     }
-    &:hover{
-      border-color: $accentColor!important;
+
+    &:hover {
+      border-color: $accentColor !important;
     }
   }
 }

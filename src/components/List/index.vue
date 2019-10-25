@@ -1,11 +1,11 @@
 <template>
 <ul v-if="data.length > 0" class="vuetodo-list">
-  <li v-for="(item, index) in sortedItems" :key="item.id">
-    <font-awesome-icon @click="completeClick(index)" class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
+  <li v-for="(item) in sortedItems" :key="item.id">
+    <font-awesome-icon @click="completeClick(item.id)" class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
     <span class="label">
       {{item.label}}
     </span>
-    <button @click="removeClick(index)">
+    <button @click="removeClick(item.id)">
       <font-awesome-icon icon="times-circle" /></button>
     <span class="date"> {{ item.date | moment}}</span>
 
@@ -35,7 +35,6 @@ export default {
   },
   computed: {
     sortedItems: function () {
-      console.log(new Date(this.data[0].sortDate));
       return this.data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
     }
   },
@@ -51,6 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .vuetodo-list {
+  border-radius: $borderRadius;
   width: 100%;
   border: solid 1px #ccc;
   list-style: none;

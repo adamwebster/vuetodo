@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .vuetodo-page-heading{
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
   h1{
     margin:0;
