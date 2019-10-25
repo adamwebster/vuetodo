@@ -47,7 +47,8 @@ export default {
     float:right;
     border:none;
     background-color:transparent;
-    color: #cd7e7e;
+    color: #777;
+    font-size:18px;
   }
 
  

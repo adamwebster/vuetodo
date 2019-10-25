@@ -41,16 +41,7 @@ export default {
       greeting: 'Testing what vue js can do',
       alertMessage: '',
       newToDoValue: '',
-      listItems: [{
-        id: '1',
-        label: 'item1'
-      }, {
-        id: '2',
-        label: 'item2'
-      }, {
-        id: '3',
-        label: 'item3'
-      }, ]
+      listItems: JSON.parse(localStorage.getItem('toDos')) || [],
     }
   },
   methods: {
@@ -60,10 +51,19 @@ export default {
         this.alertMessage = 'Can\'t add the item because no text is entered.';
         return;
       }
+      let localStorageList = JSON.parse(localStorage.getItem('toDos'));
+      if(!localStorageList) {
+        localStorage.setItem('toDos', JSON.stringify([]));
+      }
+    
+  console.log(JSON.parse(localStorage.getItem('toDos')));
       this.listItems.push({
         id: this.listItems.length + 1,
         label: this.newToDoValue
       })
+
+
+      localStorage.setItem('toDos',  JSON.stringify(this.listItems))
       this.newToDoValue = '';
     },
     changevalue: function (e) {
@@ -80,10 +80,10 @@ export default {
     removeClick: function (index) {
       console.log("here", index);
       const newItems = this.listItems.slice();
-
       newItems.splice(index, 1);
-
+      
       this.listItems = newItems;
+            localStorage.setItem('toDos',  JSON.stringify(this.listItems))
     }
   }
 
