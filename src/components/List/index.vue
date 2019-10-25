@@ -11,6 +11,7 @@
   </li>
 </ul>
 <div class="vuetodo-emptystate" v-else>
+<font-awesome-icon icon="calendar-check" />
   Add an item to the list
 </div>
 </template>
