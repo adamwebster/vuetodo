@@ -52,7 +52,7 @@ export default {
       greeting: 'Testing what vue js can do',
       alertMessage: '',
       newToDoValue: '',
-      selectedDate: null,
+      selectedDate: '',
       formattedDate: '',
       listItems: JSON.parse(localStorage.getItem('toDos')) || [],
     }
