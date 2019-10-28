@@ -134,7 +134,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   background-color: #f7f7f7;

@@ -20,40 +20,40 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 button {
   background-color: transparent;
-  border: solid 1px $accentColor;
-  color: $accentColor;
- //  border-radius: 5px;
+  border: solid 1px red;
+  color: red;
   height: 34px;
   padding: 0 10px;
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
-  margin:0;
-  border-radius: $borderRadius;
-
-  &:hover {
-    border-color: darken($accentColor, 10%);
-    color: darken($accentColor, 10%)
-  }
-
-  &.primary {
-    background-color: $accentColor;
-    color: lighten($accentColor, 100%);
-    &:hover{
-      background-color: darken($accentColor, 10%);
-    }
-    &:focus{
-      border-color: darken($accentColor, 20%);
-    }
-  }
-
+  margin: 0;
+  border-radius: 5px;
 }
 
-  input + button{
-   border-top-left-radius: 0;
-   border-bottom-left-radius:0;
- }
+button:hover {
+  border-color: red;
+  color: red;
+}
+
+button.primary {
+  background-color: red;
+  color: red;
+}
+
+button.primary:hover {
+  background-color: red;
+}
+
+button.primary:focus {
+  border-color: red;
+}
+
+input+button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 </style>

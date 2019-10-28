@@ -14,12 +14,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
   .vuetodo-alert{
     width:100%;
-    background-color: lighten($alertDanger, 25%);
-    color: darken($alertDanger, 10%);
-    border: solid 1px $alertDanger;
+    background-color: red;
+    color: red;
+    border: solid 1px red;
     padding:10px;
     box-sizing:border-box;
     margin-bottom:20px;

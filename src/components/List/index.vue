@@ -48,47 +48,49 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .vuetodo-list {
-  border-radius: $borderRadius;
+  border-radius: 5px;
   width: 100%;
   border: solid 1px #ccc;
   list-style: none;
-  background-color: darken(#fff, 5%);
+  background-color: #ccc;
   margin: 10px auto;
   padding: 0;
-
-  & li {
+}
+  .vuetodo-list li {
     border-bottom: solid 1px #ccc;
     padding: 10px 10px 10px 10px;
     margin: 0;
     box-sizing: border-box;
-
-    &:last-child {
+  }
+    .vuetodo-list:last-child {
       border-bottom: none;
     }
 
-    .label {
+   .vuetodo-list .label {
       display: inline-block;
       width: calc(100% - 40px);
     }
 
-    .date {
+    .vuetodo-list .date {
       width: 100%;
       font-size: 12px;
       display: inline-block;
       color: #999;
     }
 
-    .vuetodo-list_status {
+
+   .vuetodo-list_status {
       margin-right: 5px;
       cursor: pointer;
-      &:hover{
-        color: $accentColor;
+   }
+   
+   .vuetodo-list_status hover{
+        color: red;
       }
-    }
 
-  }
+
 
   button {
     float: right;
@@ -99,18 +101,17 @@ export default {
     margin: 1px 0 0 0;
     padding: 0;
     cursor: pointer;
-
-    &:hover {
-      color: darken(#777, 10%)
-    }
   }
 
-}
+  button:hover{
+    color: red;
+  }
+
 
 .vuetodo-emptystate {
   width: 100%;
   padding: 20px;
-  background-color: darken(#fff, 5%);
+  background-color: #eee;
   box-sizing: border-box;
   border: solid 1px #ccc;
   text-align: center;
