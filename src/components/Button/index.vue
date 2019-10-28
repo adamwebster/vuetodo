@@ -23,8 +23,8 @@ export default {
 <style scoped>
 button {
   background-color: transparent;
-  border: solid 1px red;
-  color: red;
+  border: solid 1px hsl(189, 84%, 37%);
+  color: hsl(189, 84%, 37%);
   height: 34px;
   padding: 0 10px;
   box-sizing: border-box;
@@ -35,21 +35,21 @@ button {
 }
 
 button:hover {
-  border-color: red;
-  color: red;
+  border-color:  hsl(189, 84%, 37%);
+  color: hsl(189, 84%, 80%);
 }
 
 button.primary {
-  background-color: red;
-  color: red;
+  background-color: hsl(189, 84%, 37%);
+  color: hsl(189, 84%, 80%);
 }
 
 button.primary:hover {
-  background-color: red;
+  background-color:  hsl(189, 84%, 10%);
 }
 
 button.primary:focus {
-  border-color: red;
+  border-color:  hsl(189, 84%, 80%);
 }
 
 input+button {

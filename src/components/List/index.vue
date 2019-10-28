@@ -54,7 +54,7 @@ export default {
   width: 100%;
   border: solid 1px #ccc;
   list-style: none;
-  background-color: #ccc;
+  background-color: #f2f2f2;
   margin: 10px auto;
   padding: 0;
 }
@@ -68,7 +68,7 @@ export default {
       border-bottom: none;
     }
 
-   .vuetodo-list .label {
+   .vuetodo-list label {
       display: inline-block;
       width: calc(100% - 40px);
     }
@@ -87,7 +87,7 @@ export default {
    }
    
    .vuetodo-list_status hover{
-        color: red;
+        color: #5e5e5e;
       }
 
 
@@ -104,7 +104,7 @@ export default {
   }
 
   button:hover{
-    color: red;
+    color: #5e5e5e;
   }
 
 

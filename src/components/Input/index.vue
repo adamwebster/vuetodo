@@ -29,7 +29,7 @@ input {
 }
   input:focus {
     outline: none;
-    border-color: red;
+    border-color: hsl(189, 84%, 37%);
   }
 
 

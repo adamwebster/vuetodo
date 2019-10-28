@@ -126,11 +126,8 @@ export default {
     overDue: function () {
       const formatDate = (dateToFormat) => moment.utc(dateToFormat).format('MMM D YYYY')
       return this.listItems.filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
-
     }
-
   }
-
 }
 </script>
 
@@ -155,7 +152,8 @@ body {
   display: flex;
   flex: 1 1;
   flex-flow: row;
-  &.vuetodo_addnew{
+
+  &.vuetodo_addnew {
     margin-bottom: 25px;
   }
 }
@@ -164,16 +162,12 @@ body {
   margin: 0 5px;
 }
 
-.vdp-datepicker__calendar {
-  .cell:not(.blank):not(.day-header) {
-    &.selected {
-      background: $accentColor !important;
-      color: lighten($accentColor, 25%);
-    }
+.vdp-datepicker__calendar .cell:not(.blank):not(.day-header).selected {
+  background: hsl(189, 84%, 37%);
+  color: hsl(189, 84%, 80%);
+}
 
-    &:hover {
-      border-color: $accentColor !important;
-    }
-  }
+.vdp-datepicker__calendar .cell:not(.blank):not(.day-header):hover {
+  border-color: hsl(189, 84%, 37%);
 }
 </style>
