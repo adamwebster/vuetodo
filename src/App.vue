@@ -118,14 +118,14 @@ export default {
   },
   computed: {
     totalItemCount: function () {
-      return this.listItems.length;
+      return this.listItems.filter(item => item.completed === false).length;
     },
     dueToday: function () {
-      return this.listItems.filter(item => moment(item.date).format('MMM D YYYY') === moment().format('MMM D YYYY')).length;
+      return this.listItems.filter(item => item.completed === false).filter(item => moment(item.date).format('MMM D YYYY') === moment().format('MMM D YYYY')).length;
     },
     overDue: function () {
       const formatDate = (dateToFormat) => moment.utc(dateToFormat).format('MMM D YYYY')
-      return this.listItems.filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
+      return this.listItems.filter(item => item.completed === false).filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
     }
   }
 }
