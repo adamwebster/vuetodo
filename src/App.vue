@@ -21,6 +21,11 @@
     <Datepicker :value="selectedDate" placeholder="Choose a date..." @selected="changeDate" format="MMM dsu yyyy" />
     <Button @click="addItem" primary>Add Item</Button>
   </div>
+  <div class="flex-row btn-group">
+    <Button @click="showAll">Show all</Button>
+  <Button @click="showNotCompleted">Show not completed</Button>
+    <Button @click="showCompleted">Show completed</Button>
+  </div>
   <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
 </div>
 </template>
@@ -113,7 +118,23 @@ export default {
       toCheck[0].completed = !toCheck[0].completed;
       this.listItems = newItems;
       localStorage.setItem('toDos', JSON.stringify(this.listItems))
-    }
+    },
+    showNotCompleted: function () {
+     const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      const filtered = dataList.filter(item => item.completed === false);
+      this.listItems = filtered;
+    },
+
+showCompleted: function () {
+     const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      const filtered = dataList.filter(item => item.completed === true);
+      this.listItems = filtered;
+    },
+    
+    showAll: function () {
+     const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      this.listItems = dataList;
+    },
 
   },
   computed: {
@@ -153,10 +174,11 @@ body {
   flex: 1 1;
   flex-flow: row;
 
-  &.vuetodo_addnew {
+}
+
+  .vuetodo_addnew {
     margin-bottom: 25px;
   }
-}
 
 .vdp-datepicker {
   margin: 0 5px;
@@ -170,4 +192,21 @@ body {
 .vdp-datepicker__calendar .cell:not(.blank):not(.day-header):hover {
   border-color: hsl(189, 84%, 37%);
 }
+.btn-group button {
+  flex: 1 1;
+  border-radius:0;
+  border-right-width: 0;
+}
+
+.btn-group button:first-child{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.btn-group button:last-child{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-right-width: 1px;
+}
+
 </style>
