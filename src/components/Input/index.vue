@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 input {
   border: solid 1px #ccc;
   height: 34px;
@@ -25,6 +25,7 @@ input {
   flex: 1 1;
   margin: 0;
   border-radius: 5px;
+  background-color: darken(#fff, 20%);
   -webkit-appearance:none;
 }
   input:focus {
