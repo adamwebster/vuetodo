@@ -13,10 +13,24 @@ module.exports = {
           loader: 'vue-loader',
           options: {
             presets: [
-             '@babel/preset-env'
+              '@babel/preset-env'
             ]
           }
         },
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
