@@ -1,7 +1,7 @@
 <template>
 <ul v-if="data.length > 0" class="vuetodo-list">
-  <li v-for="(item) in sortedItems" :key="item.id">
-    <font-awesome-icon @click="completeClick(item.id)" class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
+  <li @click="completeClick(item.id)"  v-for="(item) in sortedItems" :key="item.id">
+    <font-awesome-icon class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
     <span class="label">
       {{item.label}}
     </span>
@@ -62,6 +62,7 @@ export default {
     border-bottom: solid 1px #ccc;
     padding: 10px 10px 10px 10px;
     margin: 0;
+    cursor:pointer;
     box-sizing: border-box;
   }
     .vuetodo-list li:last-child {

@@ -34,7 +34,13 @@ button {
   border-radius: 5px;
 }
 
-button:hover {
+button[disabled]{
+  background-color: #e7e7e7;
+  color: #9f9f9f;
+  border-color: #9f9f9f;
+}
+
+button:not([disabled]):hover {
   border-color: hsl(189, 84%, 37%);
   background-color: hsl(189, 84%, 80%);
   color: hsl(189, 84%, 37%);

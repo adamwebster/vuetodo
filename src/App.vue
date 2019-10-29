@@ -23,7 +23,7 @@
   </div>
   <div class="flex-row btn-group">
     <Button :class="activeFilter === 'All' ? 'active' : ''" @click="showAll">Show all</Button>
-    <Button :class="activeFilter === 'NotCompleted' ? 'active' : ''" @click="showNotCompleted">Show not completed</Button>
+    <Button :disabled="leftToDue === 0" :class="activeFilter === 'NotCompleted' ? 'active' : ''" @click="showNotCompleted">Show not completed</Button>
     <Button :class="activeFilter === 'Completed' ? 'active' : ''" @click="showCompleted">Show completed</Button>
   </div>
   <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
@@ -151,6 +151,9 @@ export default {
     overDue: function () {
       const formatDate = (dateToFormat) => moment.utc(dateToFormat).format('MMM D YYYY')
       return this.listItems.filter(item => item.completed === false).filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
+    },
+    leftToDue: function () {
+      return this.listItems.filter(item => item.completed === false).length;
     }
   }
 }
