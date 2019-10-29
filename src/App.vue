@@ -23,7 +23,7 @@
   </div>
   <div class="flex-row btn-group">
     <Button @click="showAll">Show all</Button>
-  <Button @click="showNotCompleted">Show not completed</Button>
+    <Button @click="showNotCompleted">Show not completed</Button>
     <Button @click="showCompleted">Show completed</Button>
   </div>
   <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
@@ -105,34 +105,34 @@ export default {
       this.showAlert = false;
     },
     removeClick: function (index) {
-      const newItems = this.listItems.slice();
-      const toRemove = this.listItems.filter(item => item.id === index);
-      const toRemoveIndex = this.listItems.indexOf(toRemove[0]);
+      const newItems = JSON.parse(localStorage.getItem('toDos'));
+      const toRemove = newItems.filter(item => item.id === index);
+      const toRemoveIndex = newItems.indexOf(toRemove[0]);
       newItems.splice(toRemoveIndex, 1);
       this.listItems = newItems;
       localStorage.setItem('toDos', JSON.stringify(this.listItems))
     },
     markCompleted: function (index) {
-      const newItems = this.listItems.slice();
-      const toCheck = this.listItems.filter(item => item.id === index);
+      const newItems = JSON.parse(localStorage.getItem('toDos'));
+      const toCheck = newItems.filter(item => item.id === index);
       toCheck[0].completed = !toCheck[0].completed;
       this.listItems = newItems;
       localStorage.setItem('toDos', JSON.stringify(this.listItems))
     },
     showNotCompleted: function () {
-     const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       const filtered = dataList.filter(item => item.completed === false);
       this.listItems = filtered;
     },
 
-showCompleted: function () {
-     const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+    showCompleted: function () {
+      const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       const filtered = dataList.filter(item => item.completed === true);
       this.listItems = filtered;
     },
-    
+
     showAll: function () {
-     const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       this.listItems = dataList;
     },
 
@@ -176,9 +176,9 @@ body {
 
 }
 
-  .vuetodo_addnew {
-    margin-bottom: 25px;
-  }
+.vuetodo_addnew {
+  margin-bottom: 25px;
+}
 
 .vdp-datepicker {
   margin: 0 5px;
@@ -192,21 +192,21 @@ body {
 .vdp-datepicker__calendar .cell:not(.blank):not(.day-header):hover {
   border-color: hsl(189, 84%, 37%);
 }
+
 .btn-group button {
   flex: 1 1;
-  border-radius:0;
+  border-radius: 0;
   border-right-width: 0;
 }
 
-.btn-group button:first-child{
+.btn-group button:first-child {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
-.btn-group button:last-child{
+.btn-group button:last-child {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border-right-width: 1px;
 }
-
 </style>
