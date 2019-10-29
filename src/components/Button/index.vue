@@ -35,8 +35,9 @@ button {
 }
 
 button:hover {
-  border-color:  hsl(189, 84%, 37%);
-  color: hsl(189, 84%, 80%);
+  border-color: hsl(189, 84%, 37%);
+  background-color: hsl(189, 84%, 80%);
+  color: hsl(189, 84%, 37%);
 }
 
 button.primary {
@@ -45,15 +46,19 @@ button.primary {
 }
 
 button.primary:hover {
-  background-color:  hsl(189, 84%, 10%);
+  background-color: hsl(189, 84%, 10%);
 }
 
 button.primary:focus {
-  border-color:  hsl(189, 84%, 80%);
+  border-color: hsl(189, 84%, 80%);
 }
 
 input+button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+button.active {
+  background-color: hsl(189, 84%, 80%);
 }
 </style>

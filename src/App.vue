@@ -22,9 +22,9 @@
     <Button @click="addItem" primary>Add Item</Button>
   </div>
   <div class="flex-row btn-group">
-    <Button @click="showAll">Show all</Button>
-    <Button @click="showNotCompleted">Show not completed</Button>
-    <Button @click="showCompleted">Show completed</Button>
+    <Button :class="activeFilter === 'All' ? 'active' : ''" @click="showAll">Show all</Button>
+    <Button :class="activeFilter === 'NotCompleted' ? 'active' : ''" @click="showNotCompleted">Show not completed</Button>
+    <Button :class="activeFilter === 'Completed' ? 'active' : ''" @click="showCompleted">Show completed</Button>
   </div>
   <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
 </div>
@@ -59,6 +59,7 @@ export default {
       newToDoValue: '',
       selectedDate: '',
       formattedDate: '',
+      activeFilter: 'All',
       listItems: JSON.parse(localStorage.getItem('toDos')) || [],
     }
   },
@@ -120,18 +121,21 @@ export default {
       localStorage.setItem('toDos', JSON.stringify(this.listItems))
     },
     showNotCompleted: function () {
+      this.activeFilter = "NotCompleted"
       const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       const filtered = dataList.filter(item => item.completed === false);
       this.listItems = filtered;
     },
 
     showCompleted: function () {
+      this.activeFilter = "Completed"
       const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       const filtered = dataList.filter(item => item.completed === true);
       this.listItems = filtered;
     },
 
     showAll: function () {
+      this.activeFilter = "All"
       const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       this.listItems = dataList;
     },
