@@ -1,6 +1,5 @@
 'use strict'
 const { VueLoaderPlugin } = require('vue-loader');
-const {SASS} = require('sass');
 module.exports = {
   mode: 'development',
   entry: [
@@ -18,20 +17,6 @@ module.exports = {
             ]
           }
         },
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              // Prefer `dart-sass`
-              implementation: SASS,
-            },
-          },
-        ],
       },
       {
         test: /\.css$/,
