@@ -23,10 +23,10 @@
   </div>
   <div class="flex-row btn-group">
     <Button :class="activeFilter === 'All' ? 'active' : ''" @click="showAll">Show all</Button>
-    <Button :disabled="leftToDue === 0" :class="activeFilter === 'NotCompleted' ? 'active' : ''" @click="showNotCompleted">Show not completed</Button>
+    <Button :class="activeFilter === 'NotCompleted' ? 'active' : ''" @click="showNotCompleted">Show not completed</Button>
     <Button :class="activeFilter === 'Completed' ? 'active' : ''" @click="showCompleted">Show completed</Button>
   </div>
-  <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
+  <List :removeClick="removeClick" :message="emptyMessage" :completeClick="markCompleted" :data="listItems" />
 </div>
 </template>
 
@@ -60,6 +60,7 @@ export default {
       selectedDate: '',
       formattedDate: '',
       activeFilter: 'All',
+      emptyMessage: 'Add a todo to the list.',
       listItems: JSON.parse(localStorage.getItem('toDos')) || [],
     }
   },
@@ -125,6 +126,7 @@ export default {
       const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       const filtered = dataList.filter(item => item.completed === false);
       this.listItems = filtered;
+            this.emptyMessage = 'You have completed all your todos great job!.'
     },
 
     showCompleted: function () {
@@ -132,12 +134,16 @@ export default {
       const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       const filtered = dataList.filter(item => item.completed === true);
       this.listItems = filtered;
+      if(filtered.length === 0){
+        this.emptyMessage = 'You have not completed any items.'
+      }
     },
 
     showAll: function () {
       this.activeFilter = "All"
       const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
       this.listItems = dataList;
+      this.emptyMessage = 'Add a todo to the list.'
     },
 
   },
@@ -151,9 +157,6 @@ export default {
     overDue: function () {
       const formatDate = (dateToFormat) => moment.utc(dateToFormat).format('MMM D YYYY')
       return this.listItems.filter(item => item.completed === false).filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
-    },
-    leftToDue: function () {
-      return this.listItems.filter(item => item.completed === false).length;
     }
   }
 }

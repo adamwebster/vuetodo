@@ -13,7 +13,7 @@
 </ul>
 <div class="vuetodo-emptystate" v-else>
   <font-awesome-icon :icon="['far', 'calendar-check']" />
-  Add an item to the list
+  {{message}}
 </div>
 </template>
 
@@ -31,6 +31,10 @@ export default {
     completeClick: {
       type: Function,
       default: () => {}
+    }, 
+    message: {
+      type: String,
+      default: ''
     }
   },
   computed: {
