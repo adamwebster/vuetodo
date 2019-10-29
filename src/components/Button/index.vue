@@ -38,6 +38,7 @@ button[disabled]{
   background-color: #e7e7e7;
   color: #9f9f9f;
   border-color: #9f9f9f;
+  cursor: default;
 }
 
 button:not([disabled]):hover {
