@@ -1,7 +1,7 @@
 <template>
 <ul v-if="data.length > 0" class="vuetodo-list">
-  <li v-for="(item) in sortedItems" :key="item.id">
-    <font-awesome-icon @click="completeClick(item.id)" class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
+  <li @click="completeClick(item.id)"  v-for="(item) in sortedItems" :key="item.id">
+    <font-awesome-icon class="vuetodo-list_status" :icon="item.completed ? ['far' ,'check-circle'] : ['far' ,'circle']" />
     <span class="label">
       {{item.label}}
     </span>
@@ -13,7 +13,7 @@
 </ul>
 <div class="vuetodo-emptystate" v-else>
   <font-awesome-icon :icon="['far', 'calendar-check']" />
-  Add an item to the list
+  {{message}}
 </div>
 </template>
 
@@ -31,6 +31,10 @@ export default {
     completeClick: {
       type: Function,
       default: () => {}
+    }, 
+    message: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -48,47 +52,50 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .vuetodo-list {
-  border-radius: $borderRadius;
+  border-radius: 5px;
   width: 100%;
   border: solid 1px #ccc;
   list-style: none;
-  background-color: darken(#fff, 5%);
+  background-color: #f2f2f2;
   margin: 10px auto;
   padding: 0;
-
-  & li {
+}
+  .vuetodo-list li {
     border-bottom: solid 1px #ccc;
     padding: 10px 10px 10px 10px;
     margin: 0;
+    cursor:pointer;
     box-sizing: border-box;
-
-    &:last-child {
+  }
+    .vuetodo-list li:last-child {
       border-bottom: none;
     }
 
-    .label {
+   .vuetodo-list label {
       display: inline-block;
       width: calc(100% - 40px);
     }
 
-    .date {
+    .vuetodo-list .date {
       width: 100%;
       font-size: 12px;
       display: inline-block;
       color: #999;
     }
 
-    .vuetodo-list_status {
+
+   .vuetodo-list_status {
       margin-right: 5px;
       cursor: pointer;
-      &:hover{
-        color: $accentColor;
+   }
+   
+   .vuetodo-list_status hover{
+        color: #5e5e5e;
       }
-    }
 
-  }
+
 
   button {
     float: right;
@@ -99,18 +106,17 @@ export default {
     margin: 1px 0 0 0;
     padding: 0;
     cursor: pointer;
-
-    &:hover {
-      color: darken(#777, 10%)
-    }
   }
 
-}
+  button:hover{
+    color: #5e5e5e;
+  }
+
 
 .vuetodo-emptystate {
   width: 100%;
   padding: 20px;
-  background-color: darken(#fff, 5%);
+  background-color: #eee;
   box-sizing: border-box;
   border: solid 1px #ccc;
   text-align: center;

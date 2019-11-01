@@ -5,7 +5,7 @@ const webpackMiddleware = require('webpack-dev-middleware');
 // Setup
 const app = express();
 const port = 3090;
-const config = require('./node_modules/@vue/cli-service/webpack.config.js');
+const config = require('./webpack.config.dev.js');
 const compiler = webpack(config);
 const middleware = webpackMiddleware(compiler, {
   publicPath: "/",

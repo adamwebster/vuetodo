@@ -21,7 +21,12 @@
     <Datepicker :value="selectedDate" placeholder="Choose a date..." @selected="changeDate" format="MMM dsu yyyy" />
     <Button @click="addItem" primary>Add Item</Button>
   </div>
-  <List :removeClick="removeClick" :completeClick="markCompleted" :data="listItems" />
+  <div class="flex-row btn-group">
+    <Button :class="activeFilter === 'All' ? 'active' : ''" @click="showAll">Show all</Button>
+    <Button :class="activeFilter === 'NotCompleted' ? 'active' : ''" @click="showNotCompleted">Show not completed</Button>
+    <Button :class="activeFilter === 'Completed' ? 'active' : ''" @click="showCompleted">Show completed</Button>
+  </div>
+  <List :removeClick="removeClick" :message="emptyMessage" :completeClick="markCompleted" :data="listItems" />
 </div>
 </template>
 
@@ -52,8 +57,10 @@ export default {
       greeting: 'Testing what vue js can do',
       alertMessage: '',
       newToDoValue: '',
-      selectedDate: null,
+      selectedDate: '',
       formattedDate: '',
+      activeFilter: 'All',
+      emptyMessage: 'Add a todo to the list.',
       listItems: JSON.parse(localStorage.getItem('toDos')) || [],
     }
   },
@@ -100,41 +107,62 @@ export default {
       this.showAlert = false;
     },
     removeClick: function (index) {
-      const newItems = this.listItems.slice();
-      const toRemove = this.listItems.filter(item => item.id === index);
-      const toRemoveIndex = this.listItems.indexOf(toRemove[0]);
+      const newItems = JSON.parse(localStorage.getItem('toDos'));
+      const toRemove = newItems.filter(item => item.id === index);
+      const toRemoveIndex = newItems.indexOf(toRemove[0]);
       newItems.splice(toRemoveIndex, 1);
       this.listItems = newItems;
       localStorage.setItem('toDos', JSON.stringify(this.listItems))
     },
     markCompleted: function (index) {
-      const newItems = this.listItems.slice();
-      const toCheck = this.listItems.filter(item => item.id === index);
+      const newItems = JSON.parse(localStorage.getItem('toDos'));
+      const toCheck = newItems.filter(item => item.id === index);
       toCheck[0].completed = !toCheck[0].completed;
       this.listItems = newItems;
       localStorage.setItem('toDos', JSON.stringify(this.listItems))
-    }
+    },
+    showNotCompleted: function () {
+      this.activeFilter = "NotCompleted"
+      const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      const filtered = dataList.filter(item => item.completed === false);
+      this.listItems = filtered;
+            this.emptyMessage = 'You have completed all your todos great job!.'
+    },
+
+    showCompleted: function () {
+      this.activeFilter = "Completed"
+      const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      const filtered = dataList.filter(item => item.completed === true);
+      this.listItems = filtered;
+      if(filtered.length === 0){
+        this.emptyMessage = 'You have not completed any items.'
+      }
+    },
+
+    showAll: function () {
+      this.activeFilter = "All"
+      const dataList = JSON.parse(localStorage.getItem('toDos')).slice();
+      this.listItems = dataList;
+      this.emptyMessage = 'Add a todo to the list.'
+    },
 
   },
   computed: {
     totalItemCount: function () {
-      return this.listItems.length;
+      return this.listItems.filter(item => item.completed === false).length;
     },
     dueToday: function () {
-      return this.listItems.filter(item => moment(item.date).format('MMM D YYYY') === moment().format('MMM D YYYY')).length;
+      return this.listItems.filter(item => item.completed === false).filter(item => moment(item.date).format('MMM D YYYY') === moment().format('MMM D YYYY')).length;
     },
     overDue: function () {
       const formatDate = (dateToFormat) => moment.utc(dateToFormat).format('MMM D YYYY')
-      return this.listItems.filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
-
+      return this.listItems.filter(item => item.completed === false).filter(item => moment(formatDate(item.date)).isBefore(moment().format('MMM D YYYY'))).length;
     }
-
   }
-
 }
 </script>
 
-<style lang="scss">
+<style>
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   background-color: #f7f7f7;
@@ -155,25 +183,40 @@ body {
   display: flex;
   flex: 1 1;
   flex-flow: row;
-  &.vuetodo_addnew{
-    margin-bottom: 25px;
-  }
+
+}
+
+.vuetodo_addnew {
+  margin-bottom: 25px;
 }
 
 .vdp-datepicker {
   margin: 0 5px;
 }
 
-.vdp-datepicker__calendar {
-  .cell:not(.blank):not(.day-header) {
-    &.selected {
-      background: $accentColor !important;
-      color: lighten($accentColor, 25%);
-    }
+.vdp-datepicker__calendar .cell:not(.blank):not(.day-header).selected {
+  background: hsl(189, 84%, 37%);
+  color: hsl(189, 84%, 80%);
+}
 
-    &:hover {
-      border-color: $accentColor !important;
-    }
-  }
+.vdp-datepicker__calendar .cell:not(.blank):not(.day-header):hover {
+  border-color: hsl(189, 84%, 37%);
+}
+
+.btn-group button {
+  flex: 1 1;
+  border-radius: 0;
+  border-right-width: 0;
+}
+
+.btn-group button:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.btn-group button:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-right-width: 1px;
 }
 </style>

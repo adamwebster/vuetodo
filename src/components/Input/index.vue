@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 input {
   border: solid 1px #ccc;
   height: 34px;
@@ -24,13 +24,13 @@ input {
   display: flex;
   flex: 1 1;
   margin: 0;
-  border-radius: $borderRadius;
+  border-radius: 5px;
   -webkit-appearance:none;
-  &:focus {
+}
+  input:focus {
     outline: none;
-    border-color: $accentColor;
+    border-color: hsl(189, 84%, 37%);
   }
 
-}
 
 </style>
